@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "sendaljpt.taskq",
+  "name": "TaskQ",
+  "version": "1.1.0",
+  "author": "sendaljpt",
+  "description": "Daily to-do list in the bar with deadlines and colour-coded countdowns",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "TaskQ",
+    "description": "Daily to-do list in the bar with deadlines and colour-coded countdowns",
+    "category": "Productivity",
+    "allowMultiple": false,
+    "defaultSection": "right",
+    "schema": [
+      {
+        "key": "icon",
+        "type": "string",
+        "label": "Icon"
+      }
+    ]
+  }
+}
