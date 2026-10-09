@@ -12,7 +12,8 @@ BarWidget {
   id: root
   moduleName: "sendaljpt.taskq"
 
-  readonly property string dataPath: Quickshell.env("HOME") + "/.local/share/omarchy-tasks/tasks.json"
+  readonly property string dataDir: Quickshell.env("HOME") + "/.local/share/omarchy-tasks"
+  readonly property string dataPath: dataDir + "/tasks.json"
   property var tasks: []
   readonly property int openCount: tasks.filter(function(t) { return !t.done }).length
   // Any Nerd Font glyph or emoji; set with `omarchy bar set sendaljpt.taskq icon <glyph>`.
@@ -128,6 +129,10 @@ BarWidget {
     target.anchorItem = button
     target.hostWidget = root
   }
+
+  // First run on a new machine: the data folder may not exist yet, and
+  // FileView won't create parent directories when saving.
+  Component.onCompleted: Quickshell.execDetached(["mkdir", "-p", root.dataDir])
 
   implicitWidth: button.implicitWidth
   implicitHeight: button.implicitHeight

@@ -37,7 +37,9 @@ file, matched to your Omarchy theme.
 
 - Omarchy with the Quickshell-based **Omarchy shell** (the bar configured in
   `~/.config/omarchy/shell.json`). Older Waybar-based Omarchy versions are
-  not supported.
+  not supported. Tested on Omarchy 4.0.4.
+- **No extra dependencies.** TaskQ only uses what the Omarchy shell already
+  ships, and needs no network access or root.
 
 ## Installation
 
