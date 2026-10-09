@@ -44,7 +44,7 @@ file, matched to your Omarchy theme.
 ## Installation
 
 ```bash
-omarchy plugin add https://github.com/sendaljpt/omarchy-taskq.git --enable
+omarchy plugin add https://github.com/sendaljpt/taskq.git --enable
 ```
 
 The icon appears on the right side of the bar. To move it, for example next
@@ -61,7 +61,7 @@ omarchy bar move sendaljpt.taskq --before omarchy.bluetooth
 ### Install by hand
 
 ```bash
-git clone https://github.com/sendaljpt/omarchy-taskq.git \
+git clone https://github.com/sendaljpt/taskq.git \
   ~/.config/omarchy/plugins/sendaljpt.taskq
 omarchy-shell shell rescanPlugins
 omarchy plugin enable sendaljpt.taskq
