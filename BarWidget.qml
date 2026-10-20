@@ -94,6 +94,10 @@ BarWidget {
     if (text !== "") updateTask(id, { title: text })
   }
 
+  function setGroup(id, group) {
+    updateTask(id, { group: String(group || "").trim() })
+  }
+
   // Accepts anything Due.parse understands; empty clears the deadline.
   // Returns false (and changes nothing) when the text can't be read.
   function setDue(id, text) {

@@ -12,12 +12,21 @@ file, matched to your Omarchy theme.
 
 ![TaskQ popup in the Omarchy bar](docs/screenshot.png)
 
+> **This is a fork of [sendaljpt/taskq](https://github.com/sendaljpt/taskq)**,
+> maintained by [adnahl](https://github.com/adnahl). It adds task groups and a
+> reworked panel layout on top of upstream. Install and update from this fork:
+>
+> ```bash
+> omarchy plugin add https://github.com/adnahl/taskq.git --enable
+> ```
+
 ## Features
 
 - **Lives in the bar.** It shows an icon with the number of open tasks, and
   clicking it opens the list.
 - **Keyboard-first.** The text box is focused as soon as the popup opens, so
-  you can type a task and press Enter.
+  you can type a task and press Enter. The header and input stay visible while
+  you scroll through the task list.
 - **Deadlines in plain words.** Type `tomorrow 9am`, `+2h`, `fri` or `12/10 17:00`.
 - **Live countdown** (`2d 3h 15m left`) coloured by urgency:
 
@@ -30,6 +39,7 @@ file, matched to your Omarchy theme.
 - **Overdue warning.** The bar icon turns red while any task is overdue.
 - **Matches your theme.** It uses your Omarchy theme's colours and font.
 - **Edit in place.** You can rename a task, change its deadline or delete it.
+- **Custom groups.** Assign tasks to groups and switch the list to a grouped view.
 - **Plain JSON storage.** Your tasks are one readable file that's easy to
   back up or sync.
 
@@ -44,7 +54,7 @@ file, matched to your Omarchy theme.
 ## Installation
 
 ```bash
-omarchy plugin add https://github.com/sendaljpt/taskq.git --enable
+omarchy plugin add https://github.com/adnahl/taskq.git --enable
 ```
 
 The icon appears on the right side of the bar. To move it, for example next
@@ -61,7 +71,7 @@ omarchy bar move sendaljpt.taskq --before omarchy.bluetooth
 ### Install by hand
 
 ```bash
-git clone https://github.com/sendaljpt/taskq.git \
+git clone https://github.com/adnahl/taskq.git \
   ~/.config/omarchy/plugins/sendaljpt.taskq
 omarchy-shell shell rescanPlugins
 omarchy plugin enable sendaljpt.taskq
@@ -77,14 +87,18 @@ omarchy plugin enable sendaljpt.taskq
 | Tick or untick a task | Click the task |
 | Set or change a deadline | Hover over the task and click **⏱**, type, then press **Enter** |
 | Rename a task | Hover over the task and click **✎**, edit, then press **Enter** |
+| Assign or change a group | Hover over the task and click **▦**, enter a group name, then press **Enter** |
 | Delete a task | Hover over the task and click **✕** |
+| Group or ungroup the list | Click **Group** in the popup header |
 | Cancel an edit | **Escape** |
 | Remove all finished tasks | Click **Clear completed** |
 | Close the popup | **Escape** |
 | Open the raw task file | Right-click the bar icon |
 
-Open tasks are sorted by deadline, soonest first. Tasks without a deadline
-come next, and completed tasks are listed last.
+By default, open tasks are sorted by deadline, soonest first. Tasks without a
+deadline come next, and completed tasks are listed last. Click **Group** to
+show custom group headings; ungrouped tasks come first, and tasks inside each
+group are ordered by deadline, with completed tasks last.
 
 ### Writing deadlines
 
@@ -158,6 +172,7 @@ It's plain JSON, with deadlines stored as Unix timestamps in milliseconds:
   {
     "id": 1791474834356,
     "title": "Reply to client email",
+    "group": "Work",
     "done": false,
     "created": "2026-10-09T08:00:00.000Z",
     "due": 1791534845008
@@ -222,6 +237,15 @@ node -e 'const D = require("/tmp/due.cjs"); const d = D.parse("tomorrow 9am"); c
 Issues and pull requests are welcome. To work on the plugin, clone it into
 `~/.config/omarchy/plugins/sendaljpt.taskq`. The shell reloads plugin code
 when you save, and if a change doesn't appear, run `omarchy restart shell`.
+
+The installed checkout uses this fork as `origin`, so `omarchy plugin update
+sendaljpt.taskq` pulls from here. Upstream is kept as a second remote:
+
+```bash
+git remote -v                          # origin = this fork, upstream = sendaljpt/taskq
+git fetch upstream
+git log upstream/main..main             # commits that are only in the fork
+```
 
 ## License
 
